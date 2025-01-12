@@ -19,5 +19,4 @@ fun TopBar(title: String) {
             Text(title)
         }
     )
-    
 }

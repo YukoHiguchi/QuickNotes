@@ -39,6 +39,7 @@ fun HomeScreen(
         ) {
             items(notes.size) { index ->
                 val note = notes[index]
+                // Individual note in the Card
                 Card(
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -56,7 +57,7 @@ fun HomeScreen(
                             note.title,
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
-                            overflow = TextOverflow.Ellipsis
+                            maxLines = 1, overflow = TextOverflow.Ellipsis
                         )
                         Text(
                             note.content,

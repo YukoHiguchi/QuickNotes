@@ -23,6 +23,15 @@ import androidx.compose.ui.unit.dp
 import com.example.quicknotes.Note
 import com.example.quicknotes.scaffold.TopBar
 
+/*
+This composable function is used for adding and editing note.
+
+Display Title and Content input fields, and Save and Cancel buttons
+If parameter note is null, it is an adding note case, if note is passed, display the title and content of the note.
+Save button is disabled if either of fields are empty.
+Top bar shows "Add Note" if it is adding case, if not, shows "Edit Note"
+
+ */
 @Composable
 fun NoteScreen(note: Note?, save: (Note) -> Unit, cancel: () -> Unit) {
     var title by remember { mutableStateOf(note?.title ?: "")}

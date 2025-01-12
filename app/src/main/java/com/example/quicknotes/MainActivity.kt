@@ -16,7 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quicknotes.screens.HomeScreen
 import com.example.quicknotes.screens.NoteScreen
-import com.example.quicknotes.screens.Screen
+
 import com.example.quicknotes.ui.theme.QuickNotesTheme
 
 
@@ -38,17 +38,26 @@ fun QuickNoteApp() {
     var noteIdCounter by remember { mutableIntStateOf(notes.size) }
     val navController = rememberNavController()
 
+    /*
+    Manage navigation routes
+
+    "home" -> Displays the list of notes
+    "add" ->  Add new note
+    "edit/{noteId}" -> pass noteId to Edit the note
+
+     */
+
     NavHost(
         navController,
-        startDestination = Screen.HomeScreen.route
+        startDestination = "home"
     ) {
-        composable(route = Screen.HomeScreen.route) {
+        composable(route = "home") {
             HomeScreen(
                 notes,
-                onAddNote = { navController.navigate(Screen.AddNoteScreen.route) },
-                onEditNote = { note -> navController.navigate(Screen.EditNoteScreen.route + "${note.id}") })
+                onAddNote = { navController.navigate("add") },
+                onEditNote = { note -> navController.navigate("edit/${note.id}") })
         }
-        composable(route = Screen.AddNoteScreen.route) {
+        composable(route = "add") {
             NoteScreen(
                 save = { note ->
                     notes.add(note.copy(id = noteIdCounter++))
@@ -58,7 +67,7 @@ fun QuickNoteApp() {
                 note = null
             )
         }
-        composable(route = Screen.EditNoteScreen.route + "noteId") { backStackEntry ->
+        composable(route = "edit/{noteId}") { backStackEntry ->
             val noteId = backStackEntry.arguments?.getString("noteId")?.toInt() ?: -1
             val note = notes.find { it.id == noteId }
             if (note != null) {
@@ -75,6 +84,7 @@ fun QuickNoteApp() {
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
