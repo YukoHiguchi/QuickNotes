@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.example.quicknotes"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -40,9 +40,8 @@ android {
 }
 
 dependencies {
-    val nav_version = "2.8.5"
 
-    implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
